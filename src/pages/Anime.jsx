@@ -31,7 +31,7 @@ const Fact = styled.p`
 `;
 
 const Anime = () => {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   const [animes, setAnimes] = useState([]);
   const { anime_name } = useParams();
 
@@ -42,7 +42,6 @@ const Anime = () => {
       await axios
         .get(`http://localhost:4000/api/v1/${anime_name}`)
         .then((value) => {
-          //   console.log(value.data);
           updateData(value);
         })
         .catch(() => navigate("/404"));
@@ -55,28 +54,24 @@ const Anime = () => {
     setAnimeImage(value.data["img"]);
   }
 
-//   console.log(animes);
- 
-    return (
-      <Container>
-        <Wrapper>
-          <ImageContainer>
-            <Image src={animeImage} />
-          </ImageContainer>
-          <InfoContainer>
-            <Title>{anime_name}</Title>
+  return (
+    <Container>
+      <Wrapper>
+        <ImageContainer>
+          <Image src={animeImage} />
+        </ImageContainer>
+        <InfoContainer>
+          <Title>{anime_name}</Title>
 
-            {animes.map((item) => (
-              <Link to={"/api/v1/" + anime_name + "/" + item.fact_id}>
-                <Fact>Fact {item.fact_id}</Fact>
-              </Link>
-            ))}
-          </InfoContainer>
-        </Wrapper>
-      </Container>
-    );
-  
-
+          {animes.map((item) => (
+            <Link to={"/api/v1/" + anime_name + "/" + item.fact_id}>
+              <Fact>Fact {item.fact_id}</Fact>
+            </Link>
+          ))}
+        </InfoContainer>
+      </Wrapper>
+    </Container>
+  );
 };
 
 export default Anime;
